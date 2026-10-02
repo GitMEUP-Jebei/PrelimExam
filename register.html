@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #eef4ff, #dfe9ff 40%, #cfe0ff);
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1f2a37;
+      }
+
+      .container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .form-card {
+        width: 100%;
+        max-width: 560px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid #dfe7ff;
+        border-radius: 18px;
+        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.12);
+        padding: 32px;
+      }
+
+      h1 {
+        margin: 0 0 8px;
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      .subtitle {
+        margin: 0 0 24px;
+        text-align: center;
+        color: #52607a;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: 600;
+        color: #344054;
+      }
+
+      input,
+      select {
+        width: 100%;
+        border: 1px solid #ced9f3;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 1rem;
+        background: #fff;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      input:focus,
+      select:focus {
+        border-color: #5b8def;
+        box-shadow: 0 0 0 4px rgba(91, 141, 239, 0.12);
+        outline: none;
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #4f46e5, #2563eb);
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 18px rgba(37, 99, 235, 0.22);
+      }
+
+      .login-text {
+        margin-top: 18px;
+        text-align: center;
+        color: #475467;
+      }
+
+      .login-text a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .login-text a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 560px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+
+        .form-card {
+          padding: 24px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-card">
+        <h1>Create Account</h1>
+        <p class="subtitle">Register to continue</p>
+
+        <form id="registerForm" novalidate>
+          <div class="row">
+            <label>
+              First Name
+              <input type="text" name="firstName" placeholder="Juan" required />
+            </label>
+
+            <label>
+              Last Name
+              <input type="text" name="lastName" placeholder="Dela Cruz" required />
+            </label>
+          </div>
+
+          <label>
+            Email Address
+            <input type="email" name="email" placeholder="juan@email.com" required />
+          </label>
+
+          <label>
+            Username
+            <input type="text" name="username" placeholder="juandc" required />
+          </label>
+
+          <label>
+            Password
+            <input type="password" id="password" name="password" placeholder="Enter password" required />
+          </label>
+
+          <label>
+            Confirm Password
+            <input type="password" id="confirmPassword" placeholder="Re-enter password" required />
+          </label>
+
+          <label>
+            Role
+            <select name="role" required>
+              <option value="">Select your role</option>
+              <option>Student</option>
+              <option>Teacher</option>
+              <option>Staff</option>
+              <option>Guest</option>
+            </select>
+          </label>
+
+          <button type="submit">Register</button>
+        </form>
+
+        <p class="login-text">Already have an account? <a href="#">Login here</a></p>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById('registerForm');
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirmPassword');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (password.value !== confirmPassword.value) {
+          alert('Passwords do not match. Please try again.');
+          confirmPassword.focus();
+          return;
+        }
+
+        const formData = new FormData(form);
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+
+        alert(`Registration successful for ${firstName} ${lastName}!`);
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
